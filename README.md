@@ -35,32 +35,14 @@ limitations under the License.
 
 > Calculate the differences between consecutive elements of a double-precision floating-point strided array.
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/blas-ext-base-dediff
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-var dediff = require( '@stdlib/blas-ext-base-dediff' );
+import dediff from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dediff@deno/mod.js';
 ```
 
 <!-- lint disable maximum-heading-length -->
@@ -72,7 +54,7 @@ var dediff = require( '@stdlib/blas-ext-base-dediff' );
 Calculates the differences between consecutive elements of a double-precision floating-point strided array.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 2.0, 4.0, 6.0, 8.0, 10.0 ] );
 var p = new Float64Array( [ 1.0 ] );
@@ -100,7 +82,7 @@ The function has the following parameters:
 The `N` and stride parameters determine which elements in the strided array are accessed at runtime. For example, to compute the difference between every other element:
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 2.0, 4.0, 6.0, 8.0, 10.0 ] );
 var p = new Float64Array( [ 1.0 ] );
@@ -114,7 +96,7 @@ dediff( 3, x, 2, 1, p, 1, 1, a, 1, out, 1 );
 Note that indexing is relative to the first index. To introduce an offset, use [`typed array`][mdn-typed-array] views.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 // Initial array...
 var x0 = new Float64Array( [ 2.0, 4.0, 6.0, 8.0, 10.0 ] );
@@ -139,7 +121,7 @@ dediff( x1.length, x1, 1, 1, p, 1, 1, a, 1, out, 1 );
 Calculates the differences between consecutive elements of a double-precision floating-point strided array using alternative indexing semantics.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 2.0, 4.0, 6.0, 8.0, 10.0 ] );
 var p = new Float64Array( [ 1.0 ] );
@@ -160,7 +142,7 @@ The function has the following additional parameters:
 While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to access only the last three elements:
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 2.0, 4.0, 6.0, 8.0, 10.0 ] );
 var p = new Float64Array( [ 1.0 ] );
@@ -192,9 +174,9 @@ dediff.ndarray( 3, x, 1, x.length-3, 1, p, 1, 0, 1, a, 1, 0, out, 1, 0 );
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
-var Float64Array = require( '@stdlib/array-float64' );
-var dediff = require( '@stdlib/blas-ext-base-dediff' );
+import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@deno/mod.js';
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+import dediff from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dediff@deno/mod.js';
 
 var x = discreteUniform( 10, -100, 100, {
     'dtype': 'float64'
@@ -223,156 +205,7 @@ console.log( 'Output:', out );
 
 <!-- C interface documentation. -->
 
-* * *
 
-<section class="c">
-
-## C APIs
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- C usage documentation. -->
-
-<section class="usage">
-
-### Usage
-
-```c
-#include "stdlib/blas/ext/base/dediff.h"
-```
-
-<!-- lint disable maximum-heading-length -->
-
-#### stdlib_strided_dediff( N, \*X, strideX, N1, \*Prepend, strideP, N2, \*Append, strideA, \*Out, strideOut )
-
-<!-- lint enable maximum-heading-length -->
-
-Calculates the differences between consecutive elements of a double-precision floating-point strided array.
-
-```c
-const double x[] = { 2.0, 4.0, 6.0, 8.0, 10.0 };
-const double p[] = { 1.0 };
-const double a[] = { 11.0 };
-double out[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-
-stdlib_strided_dediff( 5, x, 1, 1, p, 1, 1, a, 1, out, 1 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **X**: `[in] double` input [`Float64Array`][@stdlib/array/float64].
--   **strideX**: `[in] CBLAS_INT` stride length for `X`.
--   **N1**: `[in] CBLAS_INT` number of indexed elements to prepend.
--   **Prepend**: `[in] double` a [`Float64Array`][@stdlib/array/float64] containing values to prepend after computing differences.
--   **strideP**: `[in] CBLAS_INT` stride length for `Prepend`.
--   **N2**: `[in] CBLAS_INT` number of indexed elements to append.
--   **Append**: `[in] double` a [`Float64Array`][@stdlib/array/float64] containing values to append after computing differences.
--   **strideA**: `[in] CBLAS_INT` strides length for `Append`.
--   **Out**: `[out] double` output [`Float64Array`][@stdlib/array/float64]. Must have `N + N1 + N2 - 1` indexed elements.
--   **strideOut**: `[in] CBLAS_INT` stride length for `Out`.
-
-```c
-void stdlib_strided_dediff( const CBLAS_INT N, const double *X, const CBLAS_INT strideX, const CBLAS_INT N1, const double *Prepend, const CBLAS_INT strideP, const CBLAS_INT N2, const double *Append, const CBLAS_INT strideA, double *Out, const CBLAS_INT strideOut );
-```
-
-<!-- lint disable maximum-heading-length -->
-
-#### stdlib_strided_dediff_ndarray( N, \*X, strideX, offsetX, N1, \*Prepend, strideP, offsetP, N2, \*Append, strideA, offsetA, \*Out, strideOut, offsetOut )
-
-<!-- lint enable maximum-heading-length -->
-
-Calculates the differences between consecutive elements of a double-precision floating-point strided array using alternative indexing semantics.
-
-```c
-const double x[] = { 2.0, 4.0, 6.0, 8.0, 10.0 };
-const double p[] = { 1.0 };
-const double a[] = { 11.0 };
-double out[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-
-stdlib_strided_dediff_ndarray( 5, 1, x, 1, 0, 1, p, 1, 0, 1, a, 1, 0, out, 1, 0 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **X**: `[in] double` input [`Float64Array`][@stdlib/array/float64].
--   **strideX**: `[in] CBLAS_INT` stride length for `X`.
--   **offsetX**: `[in] CBLAS_INT` starting index for `X`.
--   **N1**: `[in] CBLAS_INT` number of indexed elements to prepend.
--   **Prepend**: `[in] double` a [`Float64Array`][@stdlib/array/float64] containing values to prepend after computing differences.
--   **strideP**: `[in] CBLAS_INT` stride length for `Prepend`.
--   **offsetP**: `[in] CBLAS_INT` starting index for `Prepend`.
--   **N2**: `[in] CBLAS_INT` number of indexed elements to append.
--   **Append**: `[in] double` a [`Float64Array`][@stdlib/array/float64] containing values to append after computing differences.
--   **strideA**: `[in] CBLAS_INT` strides length for `Append`.
--   **offsetA**: `[in] CBLAS_INT` starting index for `Append`.
--   **Out**: `[out] double` output [`Float64Array`][@stdlib/array/float64]. Must have `N + N1 + N2 - 1` indexed elements.
--   **strideOut**: `[in] CBLAS_INT` stride length for `Out`.
--   **offsetOut**: `[in] CBLAS_INT` starting index for `Out`.
-
-```c
-void stdlib_strided_dediff_ndarray( const CBLAS_INT N, const double *X, const CBLAS_INT strideX, const CBLAS_INT offsetX, const CBLAS_INT N1, const double *Prepend, const CBLAS_INT strideP, const CBLAS_INT offsetP, const CBLAS_INT N2, const double *Append, const CBLAS_INT strideA, const CBLAS_INT offsetA, double *Out, const CBLAS_INT strideOut, const CBLAS_INT offsetOut );
-```
-
-</section>
-
-<!-- /.usage -->
-
-<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="notes">
-
-</section>
-
-<!-- /.notes -->
-
-<!-- C API usage examples. -->
-
-<section class="examples">
-
-### Examples
-
-```c
-#include "stdlib/blas/ext/base/dediff.h"
-#include <stdio.h>
-
-int main( void ) {
-    // Create a strided array:
-    const double x[] = { 1.0, -2.0, 3.0, -4.0, 5.0, -6.0, 7.0, -8.0 };
-
-    // Define a list of values to prepend:
-    const double p[] = { -1.0 };
-
-    // Define a list of values to append:
-    const double a[] = { 10.0 };
-
-    // Define an output array:
-    double out[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-
-    // Compute forward differences:
-    stdlib_strided_dediff( 8, x, 1, 1, p, 1, 1, a, 1, out, 1 );
-
-    // Print the result:
-    for ( int i = 0; i < 9; i++ ) {
-        printf( "out[ %i ] = %lf\n", i, out[ i ] );
-    }
-}
-```
-
-</section>
-
-<!-- /.examples -->
-
-</section>
-
-<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
@@ -391,7 +224,7 @@ int main( void ) {
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -454,7 +287,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/blas-ext-base-dediff/main/LICENSE
 
-[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64
+[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64/tree/deno
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
